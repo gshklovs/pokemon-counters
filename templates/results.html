@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+    <h1>Gregory's Pokemon Website Results</h1>
+    <h1>For {{ pokemon_name }}</h1>
+    <h2>
+        {% for result in my_result%}
+        <div>{{ result }}</div>
+        {% endfor %}
+    </h2>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+    <h1>Gregory's Pokemon Website</h1>
+    <form action="/register" method="post">
+        <input name="pokemon_name", placeholder= "pokemon name", type="text">
+        <input name="list_len", placeholder="number of results", type="text">
+        <input type="submit", value="Calculate Counters">
+    </form>
+{% endblock %}
