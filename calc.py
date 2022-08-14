@@ -42,14 +42,26 @@ def calculate_type_advantage(user_type, opponent_type) -> int:
 
 def calculate_viability_index(handler, opponent_type: str, moves: list) -> float:
     """Calculate the viability index given a pokemon's handler"""
-    stats = handler.get_stats()
-    types = handler.get_types()
-    attack = stats['attack']
-    sp_attack = stats['special-attack']
+    try:
+        stats = handler.get_stats()
+        types = handler.get_types()
 
-    strongest_move_strength = get_strongest_move(moves, opponent_type, sp_attack, attack)
-    sum_of_stats = stats['hp'] + stats['defense'] + stats['special-defense'] + stats['speed']
-    type_advantage = 1 / calculate_type_advantage(opponent_type, types) if calculate_type_advantage(opponent_type, types) else .25
+        if type(stats) == list:
+            hp, attack, defense, sp_attack, sp_defense, speed = stats[0]['base_stat'], stats[1]['base_stat'], stats[2]['base_stat'], stats[3]['base_stat'], stats[4]['base_stat'], stats[5]['base_stat']
+        else:
+            attack = stats['attack']
+            sp_attack = stats['special-attack']
+            hp, defense, sp_defense, speed = stats['hp'], stats['defense'], stats['special-defense'], stats['speed']
+
+        strongest_move_strength = get_strongest_move(moves, opponent_type, sp_attack, attack)
+        sum_of_stats = hp + defense + sp_defense + speed
+        type_advantage = 1 / calculate_type_advantage(opponent_type, types) if calculate_type_advantage(opponent_type, types) else .25
+    except TypeError as e:
+        print('unknown format used for:')
+        print(handler.start_url)
+        print(stats)
+        print(e)
+        exit()
 
     return sum_of_stats * type_advantage * strongest_move_strength
     #sum of stats

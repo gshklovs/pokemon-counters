@@ -52,7 +52,10 @@ def get_handler(pokemon_name: str, path_name='cache', is_pokemon=True) -> 'pokem
 
     pokemon_path = dir_path / pokemon_name
     if pokemon_path.exists():
-        return api.pokeFile(pokemon_name, pokemon_path)
+        try:
+            return api.pokeFile(pokemon_name, pokemon_path)
+        except urllib.error.URLError:
+            return api.pokeAPI(pokemon_name, pokemon_path, is_pokemon=is_pokemon)
     else:
         return api.pokeAPI(pokemon_name, pokemon_path, is_pokemon=is_pokemon)
 
@@ -68,4 +71,4 @@ def get_moves_objects(handler) -> list:
 
 
 if __name__ == "__main__":
-    run()
+    run('pikachu')
