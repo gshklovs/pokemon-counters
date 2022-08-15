@@ -64,9 +64,9 @@ def calculate_viability_index(handler, opponent_type: str, moves: list) -> float
         exit()
 
     return sum_of_stats * type_advantage * strongest_move_strength
-    #sum of stats
-    #strongest move for i in moves: get strongest move
-    #type advantage
+    # sum of stats
+    # strongest move for i in moves: get strongest move
+    # type advantage
     # sum of stats (excluding sp and physical attack) * type advantage * (strongest move * the stat of the type of attack it is)
 
 
