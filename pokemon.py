@@ -71,4 +71,4 @@ def get_moves_objects(handler) -> list:
 
 
 if __name__ == "__main__":
-    run('pikachu')
+    print(run('pikachu'))

@@ -49,12 +49,10 @@ class pokeAPI:
 
     def get_stats(self) -> list[str]:
         """Return a list of stats summarizing the stat names and their values"""
-        stats_list = []
+        stats_dict = {}
         for stat in self.json_object['stats']:
-            stats_str = stat['stat']['name']
-            stats_str += ': ' + str(stat['base_stat'])
-            stats_list.append(stats_str)
-        return stats_list
+            stats_dict[stat['stat']['name']] = stat['base_stat']
+        return stats_dict
 
     def get_types(self) -> str:
         """Return a string naming the type of the pokemon"""
